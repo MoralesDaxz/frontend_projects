@@ -14,7 +14,28 @@ body {
     background: linear-gradient(240deg, rgba(4, 18, 31, 1) 0%, rgba(7, 58, 103, 1) 76%, rgba(26, 89, 144, 1) 100%);
     color: white;
 }
-input{
-    background-color: white;
-    color: black;
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+/* button {
+    border: solid 2px azure;
+    padding: 2px;
+    border-radius: 6px;
+}
+button:active{
+    background: #049c48;
+}
+
+button:hover {
+    opacity: .8;
+}
+ */
