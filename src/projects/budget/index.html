@@ -10,15 +10,16 @@
     <title>Presupuesto</title>
 </head>
 
-<body class="flex flex-col items-center">
+<body class="flex flex-col items-center gap-2">
     <header>
         <div class="flex gap-2">
 
             <h1 class="text-center">Presupuesto</h1> <span id="amount"></span>
         </div>
         <form id="budgetForm">
-            <input id="budgetInput" type="number" placeholder="Ingrese el presupuesto" required>
+            <input class="bg-amber-50 text-black" id="budgetInput" type="number" placeholder="Ingrese el presupuesto" required>
             <button type="submit">Guardar</button>
+
             <button onclick="isDisabledBudgetButton()">
                 Reiniciar
             </button>
@@ -26,7 +27,7 @@
 
 
     </header>
-    <section class="flex justify-evenly bg-amber-50 text-black w-[80%] rounded-2xl">
+    <section class="flex justify-evenly bg-amber-50 text-black w-[80%] rounded-2xl" id="container">
         <article>
             <h2 class="text-center">Añade tus gastos aqui</h2>
             <form id="addExpenseForm" action="#">
