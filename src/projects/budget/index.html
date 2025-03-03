@@ -10,56 +10,48 @@
     <title>Presupuesto</title>
 </head>
 
-<body class="flex flex-col items-center gap-2">
-    <header>
-        <div class="flex gap-2">
+<body class="flex flex-col items-center gap-4">
+    <header class="flex flex-col items-center gap-2">
 
-            <h1 class="text-center">Presupuesto</h1> <span id="amount"></span>
-        </div>
-        <form id="budgetForm">
-            <input class="bg-amber-50 text-black" id="budgetInput" type="number" placeholder="Ingrese el presupuesto" required>
+
+        <h1 class="text-center font-normal text-xl">Presupuesto</h1> <span id="amount"></span>
+
+        <form id="budgetForm" class="flex gap-4 h-[30px]">
+            <input class="bg-amber-50 text-black" id="budgetInput" type="number" placeholder="Ingrese el presupuesto"
+                required>
             <button type="submit">Guardar</button>
 
             <button onclick="isDisabledBudgetButton()">
                 Reiniciar
             </button>
         </form>
-
-
     </header>
-    <section class="flex justify-evenly bg-amber-50 text-black w-[80%] rounded-2xl" id="container">
-        <article>
-            <h2 class="text-center">Añade tus gastos aqui</h2>
+    <section class="relative hidden" id="boxExpense">
+        <article class="bg-amber-50 text-black p-4 rounded-sm">
+            <h2 class="text-center font-bold">Añade tus gastos aqui</h2>
             <form id="addExpenseForm" action="#">
-                <div class="form-group">
-                    <label for="nameExpense">Gasto:</label>
-                    <input type="text" class="form-control" id="nameExpense" placeholder="Nombre Gasto">
+                <div>
+                    <label for="nameExpense">Concepto:</label>
+                    <input type="text" id="nameExpense" placeholder="Transporte">
                 </div>
-                <div class="form-group">
-                    <label for="quantityExpense">Cantidad:</label>
-                    <input type="text" class="form-control" id="quantityExpense" placeholder="Cantidad en $">
+                <div>
+                    <label for="quantityExpense">Monto:</label>
+                    <input type="text" id="quantityExpense" placeholder="12.60">
                 </div>
                 <button type="submit">Agregar</button>
             </form>
         </article>
-        <article>
-
-            <h2 class="text-center">Listado</h2>
-
-            <ul id="expenseList"></ul>
-
-            <div id="presupuesto">
-                <div class="alert alert-primary">
-                    <p>Presupuesto: $ <span id="total"></span> </p>
-                </div>
-                <div class="s">
-                    <p>Restante: $ <span id="remaining"></span></p>
-                </div>
+        <div class="flex gap-4">
+            <p>Presupuesto: <span id="total"></span> </p>
+            <p>Restante: <span id="remaining"></span></p>
+        </div>
+        <div>
+            <h2>Lista de Gastos</h2>
+            <div id="expenseList">
             </div>
-
-        </article>
-        </sectionc>
-        <script src="./app.js"></script>
+        </div>
+    </section>
+    <script src="./app.js"></script>
 </body>
 
 </html>

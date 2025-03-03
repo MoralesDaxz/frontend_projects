@@ -25,17 +25,22 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-
-/* button {
-    border: solid 2px azure;
+.itemListExpense {
     padding: 2px;
-    border-radius: 6px;
-}
-button:active{
-    background: #049c48;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
 }
 
-button:hover {
-    opacity: .8;
+.alert {
+    text-align: center;
+    padding: 4px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 30%;
+    right: 5%;
 }
- */
+
+#amount {
+    font-size: xx-large;
+}
