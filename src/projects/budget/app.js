@@ -3,17 +3,19 @@ const listExpense = document.querySelector("#expenseList");
 const inputBudget = document.getElementById("budgetInput");
 const budgetForm = document.getElementById("budgetForm");
 const spanAmount = document.getElementById("amount");
-const boxFormExpense = document.getElementById("boxExpense");
+const boxFormExpense = document.getElementById("boxAddExpense");
 const formExpense = document.getElementById("addExpenseForm");
 const spanTotal = document.getElementById("total");
 const spanRemaining = document.getElementById("remaining");
-const localStorageInfo = JSON.parse(localStorage.getItem("listExpense")) || [];
+const boxListExpense = document.getElementById("boxListExpense");
+const saveBtn = document.getElementById("saveBtn")
+const restartBtn = document.getElementById("restartBtn")
 //Clases
 class Budget {
   constructor(budgetProp) {
     this.amount = Number(budgetProp);
     this.subAmount = Number(budgetProp);
-    this.expense = localStorageInfo;
+    this.expense = [];
   }
 
   calculateSubAmount() {
@@ -25,12 +27,15 @@ class Budget {
   }
 
   calculateExpense(propExpense) {
-    const listExpense = [...this.expense, propExpense];
-    this.expense = listExpense;
+    if (this.subAmount === 0) {
+      ui.insertAlert("Fondos insuficientes", "error", "not_credit");
+      ui.rmvElement("not_credit");
+      return;
+    }
+    this.expense = [...this.expense, propExpense];
     this.calculateSubAmount();
     ui.budgetAndRest(this.amount, this.subAmount);
     ui.createListExpense(this.expense);
-    localStorage.setItem("listExpense", JSON.stringify(listExpense));
   }
   deleteItemExpense(id) {
     const deletedItem = this.expense.filter((item) => item.id !== id);
@@ -47,7 +52,7 @@ class UserInterface {
     const background = type === "error" ? "bg-red-500" : "bg-green-400";
     const alertBox = document.createElement("p");
     alertBox.innerHTML = `<p id=${id} class='${background} alert'>${message}</p>`;
-    document.querySelector("#boxExpense").appendChild(alertBox);
+    document.querySelector("#boxAddExpense").appendChild(alertBox);
   }
   createListExpense(arrExpense) {
     listExpense.innerHTML = "";
@@ -92,7 +97,7 @@ class UserInterface {
       row.appendChild(nameCell);
       row.appendChild(qtyCell);
       row.appendChild(actionCell);
-      index % 2 == 0 ? row.classList.add("bg-gray-400") : "";
+      index % 2 == 0 ? row.classList.add("bg-gray-500") : "";
       tbody.appendChild(row);
     });
 
@@ -140,6 +145,8 @@ function addExpense() {
     return;
   } else {
     budget.calculateExpense(expense);
+    boxListExpense.classList.remove("hidden");
+
     formExpense.reset();
     return document.getElementById("nameExpense").focus();
   }
@@ -147,24 +154,25 @@ function addExpense() {
 
 //Carga de presupuesto
 const initBudget = () => {
+  /* const infoBudge = { expense: [], amount: 0, subAmount: 0 }; */
   const valor = parseFloat(inputBudget.value);
   if (!isNaN(valor) && valor > 0) {
     budget = new Budget(valor);
     inputBudget.disabled = true;
+    saveBtn.classList.add("hidden")
+    restartBtn.classList.remove("hidden")
     spanAmount.innerText = `${valor.toLocaleString()} €`;
     ui.budgetAndRest(valor, valor);
     boxFormExpense.classList.remove("hidden");
-    boxFormExpense.classList.add("flex flex-col gap-4 ");
+    boxFormExpense.classList.add("flex flex-col gap-4");
   } else {
     ui.insertAlert("Ingrese un número válido.", "error", "errorEntry");
     ui.rmvElement("errorEntry");
   }
 };
-//Deshabilitar input de presupuesto
-const isDisabledBudgetButton = () => {
-  inputBudget.disabled = false;
-  inputBudget.value = "";
-  return;
+
+const resetPage = () => {
+  window.location.reload();
 };
 
 //Eventos
