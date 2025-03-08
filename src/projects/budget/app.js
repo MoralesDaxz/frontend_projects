@@ -7,13 +7,13 @@ const boxFormExpense = document.getElementById("boxExpense");
 const formExpense = document.getElementById("addExpenseForm");
 const spanTotal = document.getElementById("total");
 const spanRemaining = document.getElementById("remaining");
-
+const localStorageInfo = JSON.parse(localStorage.getItem("listExpense")) || [];
 //Clases
 class Budget {
   constructor(budgetProp) {
     this.amount = Number(budgetProp);
     this.subAmount = Number(budgetProp);
-    this.expense = [];
+    this.expense = localStorageInfo;
   }
 
   calculateSubAmount() {
@@ -25,10 +25,12 @@ class Budget {
   }
 
   calculateExpense(propExpense) {
-    this.expense = [...this.expense, propExpense];
+    const listExpense = [...this.expense, propExpense];
+    this.expense = listExpense;
     this.calculateSubAmount();
     ui.budgetAndRest(this.amount, this.subAmount);
     ui.createListExpense(this.expense);
+    localStorage.setItem("listExpense", JSON.stringify(listExpense));
   }
   deleteItemExpense(id) {
     const deletedItem = this.expense.filter((item) => item.id !== id);
@@ -49,27 +51,57 @@ class UserInterface {
   }
   createListExpense(arrExpense) {
     listExpense.innerHTML = "";
-    arrExpense.forEach((element) => {
-      console.log(element);
-      const containerExpense = document.createElement("div");
-      containerExpense.classList.add("itemListExpense");
-      const nameItem = document.createElement("p");
-      nameItem.innerText = element.nameExpense;
-      const qtyItem = document.createElement("p");
-      qtyItem.innerText = element.qtyExpense.toString();
+
+    // Crear la tabla y sus elementos
+    const table = document.createElement("table");
+    table.classList.add("expenseTable");
+
+    const thead = document.createElement("thead");
+    thead.innerHTML = `
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+        </tr>
+    `;
+
+    const tbody = document.createElement("tbody");
+
+    arrExpense.forEach((element, index) => {
+      const row = document.createElement("tr");
+
+      const nameCell = document.createElement("td");
+      nameCell.innerText = element.nameExpense;
+
+      const qtyCell = document.createElement("td");
+      qtyCell.innerText = element.qtyExpense.toString();
+
+      const actionCell = document.createElement("td");
       const deleteBtn = document.createElement("button");
-      deleteBtn.innerText = "Borrar";
+
+      deleteBtn.classList.add("btnDltExpense");
+      deleteBtn.innerText = "X";
       deleteBtn.id = element.id;
+
       deleteBtn.addEventListener("click", (event) => {
         budget.deleteItemExpense(event.target.id);
       });
 
-      containerExpense.appendChild(nameItem);
-      containerExpense.appendChild(qtyItem);
-      containerExpense.appendChild(deleteBtn);
-      listExpense.appendChild(containerExpense);
-      return element;
+      actionCell.appendChild(deleteBtn);
+
+      row.appendChild(nameCell);
+      row.appendChild(qtyCell);
+      row.appendChild(actionCell);
+      index % 2 == 0 ? row.classList.add("bg-gray-400") : "";
+      tbody.appendChild(row);
     });
+
+    // Añadir encabezado y cuerpo a la tabla
+    table.appendChild(thead);
+    table.appendChild(tbody);
+
+    // Agregar la tabla al contenedor principal
+    listExpense.appendChild(table);
   }
   budgetAndRest(amount, subAmount) {
     spanTotal.innerText = `${amount.toString()} €`;
@@ -134,7 +166,6 @@ const isDisabledBudgetButton = () => {
   inputBudget.value = "";
   return;
 };
-
 
 //Eventos
 budgetForm.addEventListener("submit", (event) => {
