@@ -10,14 +10,15 @@
     <title>Presupuesto</title>
 </head>
 
-<body class="flex flex-col items-center gap-2 p-2 max-w-[550px]">
-    <div class="flex items-center gap-2">
+<body class="flex flex-col items-center gap-2 p-2 w-full max-w-[850px]">
+    <div class="flex flex-col items-center sm:flex-row gap-2">
 
-        <h1 class="text-center font-normal text-xl my-4">Presupuesto</h1> <span id="amount"></span>
+        <h1 class="text-center font-normal text-xl sm:my-4">Rendimiento de gastos</h1> <span id="amount"></span>
     </div>
-    <section class="flex flex-col sm:flex-row gap-4 p-2 rounded-sm">
+    <section class="w-full flex flex-col items-center sm:flex sm:flex-row sm:items-start sm:justify-center sm:max-w-[300px] gap-2 p-2 rounded-sm">
 
-        <form id="budgetForm" class="flex flex-col items-center justify-between gap-2 h-[240px] bg-gray-500 p-2">
+        <form id="budgetForm"
+            class="  flex flex-col items-center justify-between bg-[#acacacc5] p-2 rounded-sm">
 
             <label class="float-label-container">
                 <input class="input" type="number" id="budgetInput" placeholder="" required />
@@ -26,35 +27,35 @@
                 </span>
             </label>
 
-            <button type="submit" id="saveBtn" class="btn-primary w-[80%]">
+            <button type="submit" id="saveBtn" class="btn-primary">
                 <p>Guardar</p>
                 <img src="https://i.ibb.co/rG7kFH5m/check.png" alt="save" width="20px" height="20px">
             </button>
 
-            <button id="restartBtn" class="btn-secundary w-[80%] hidden" onclick="resetPage()">
-                <p>Reiniciar</p>
-                <img src="https://i.ibb.co/hJ2L4Wt7/reset.png" alt="reset" width="20px" height="20px">
-            </button>
-        </form>
 
-        <article class="hidden" id="boxAddExpense">
-            <div class="bg-gray-200 text-black p-1 rounded-sm h-[240px]">
-                <h2 class="text-[#041c31e7] text-center font-bold my-2">Añadir gasto</h2>
-                <form class="w-full flex flex-col items-center gap-2 " id="addExpenseForm" action="#">
+        </form>
+        <article class="hidden relative" id="boxAddExpense">
+                    <button id="restartBtn" class="btn-secundary absolute top-2 right-2 hidden" onclick="resetPage()">
+                        <p>Reiniciar</p>
+                        <img src="https://i.ibb.co/hJ2L4Wt7/reset.png" alt="reset" width="20px" height="20px">
+                    </button>
+            <div class="bg-[#e5e7ebb7] text-black p-2 rounded-sm w-full sm:max-w-[300px]">
+                <h2 class="text-[#041c31e7] text-center font-bold mt-8 mb-2">Añadir gasto</h2>
+                <form class="w-full flex flex-col items-center justify-between" id="addExpenseForm" action="#">
                     <label class="float-label-container">
-                        <input class="input" type="text" id="nameExpense" placeholder="" required />
+                        <input class="input" type="text" id="nameExpense" maxlength="16" placeholder="" required />
                         <span class="select-none bg-[#123a5ce7] text-white rounded-3xl">
                             Concepto
                         </span>
                     </label>
 
                     <label class="float-label-container">
-                        <input class="input" type="number" id="quantityExpense" placeholder="" required />
+                        <input class="input" id="quantityExpense" placeholder="" required />
                         <span class="select-none bg-[#123a5ce7] text-white rounded-3xl">
                             Monto
                         </span>
                     </label>
-                    <button class="btn-primary bg-green-400 hover:bg-green-500 w-[80%]" type="submit">
+                    <button class="btn-primary" type="submit">
                         <p>
                             Agregar
                         </p>
@@ -66,16 +67,17 @@
         </article>
         <section class="hidden" id="boxListExpense">
 
-            <article class="flex flex-col sm:flex-row gap-2 my-4">
-                <div class="flex justify-between items-center gap-1 bg-[#124b5ce7]  p-1 rounded-sm">
-                    <p>Presupuesto: </p><span class="font-bold" id="total"></span>
+            <article class="w-full flex flex-row justify-center gap-2">
+                <div class="flex justify-between items-center bg-[#124b5ce7] p-1 rounded-sm text-sm gap-1">
+                    <p>Aporte: </p><span class="" id="total"></span>
                 </div>
-                <div class="flex justify-between items-center gap-1 bg-gray-500 p-1 rounded-sm">
-                    <p>Restante: </p><span class="font-bold" id="remaining"></span>
+                <div class="flex justify-between items-center bg-gray-500 p-1 rounded-sm text-sm gap-1 animate-pulse">
+                    <p>Saldo: </p><span class="" id="remaining"></span>
                 </div>
 
             </article>
-            <article class="w-full max-w-[550px] flex flex-col items-center gap-4 bg-[#0a243b] rounded-sm">
+
+            <article class=" w-full flex flex-col items-center gap-4  rounded-sm mt-4">
                 <h2 class="text-[#fff] text-center font-bold mt-2">Lista de Gastos</h2>
                 <div id="expenseList" class="containerTable"></div>
             </article>

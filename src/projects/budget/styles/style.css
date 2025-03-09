@@ -3,175 +3,179 @@
 *,
 *::after,
 *::before {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Roboto", sans-serif;
-    min-width: 100vw;
-    min-height: 100vh;
-    background: rgb(4, 18, 31);
-    background: linear-gradient(240deg,
-            rgba(4, 18, 31, 1) 0%,
-            rgba(7, 58, 103, 1) 76%,
-            rgb(16, 54, 87) 100% #0d2b46 100%);
-    color: white;
+  font-family: "Roboto", sans-serif;
+  min-width: 100vw;
+  min-height: 100vh;
+  background: rgb(4, 18, 31);
+  background: linear-gradient(
+    240deg,
+    rgba(4, 18, 31, 1) 0%,
+    rgba(7, 58, 103, 1) 76%,
+    rgb(16, 54, 87) 100% #0d2b46 100%
+  );
+  color: white;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
-.containerTable{
-    width: 100%;
-}
-
-.itemListExpense {
-    padding: 2px;
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
+.containerTable {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 160px;
+  background-color: #0d2b46;
+  padding-block: 4px;
 }
 
 .alert {
-    text-align: center;
-    padding: 4px;
-    border-radius: 4px;
-    position: fixed;
-    top: 2%;
-    right: 5%;
+  text-align: center;
+  padding: 4px;
+  border-radius: 4px;
+  position: fixed;
+  top: 2%;
+  right: 5%;
 }
 
 #amount {
-    font-size: x-large;
+  font-size: x-large;
 }
 
-
-
 .btn-primary {
-    font-weight: 400;
-    padding: 2px;
-    border-radius: 0.125rem;
-    background-color: rgb(35, 156, 212);
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    opacity: 0.7;
+  width: fit-content;
+  font-weight: 400;
+  padding: 4px;
+  border-radius: 6px;
+  background-color: rgb(35, 156, 212);
+  border: solid 2px #77d3fd;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 4px;
+  opacity: 0.7;
 }
 
 .btn-primary:hover {
-    background-color: rgb(24, 114, 156);
-    font-weight: 500;
-    opacity: 0.90;
+  background-color: rgb(24, 114, 156);
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 .btn-secundary {
-    font-weight: 400;
-    padding: 2px;
-    border-radius: 0.125rem;
-    background-color: rgb(137, 154, 161);
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    opacity: 0.7;
+  width: fit-content;
+  font-size: smaller;
+  font-weight: 400;
+  padding: 2px;
+  border-radius: 6px;
+  background-color: rgb(137, 154, 161);
+  border: solid 2px #c2dbe7;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 4px;
+  opacity: 0.7;
 }
 
 .btn-secundary:hover {
-    background-color: rgb(120, 132, 138);
-    font-weight: 500;
-    opacity: 0.90;
+  background-color: rgb(120, 132, 138);
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 .btnDltExpense {
-    font-weight: 500;
-    font-size: 12px;
-    padding-inline: 6px;
-    padding-block: 4px;
-    border-radius: 100%;
-    height: 25px;
-    width: 25px;
-    background-color: rgba(226, 21, 14, 0.815);
-
+  font-weight: 500;
+  font-size: 12px;
+  padding-inline: 6px;
+  padding-block: 4px;
+  border-radius: 100%;
+  height: 25px;
+  width: 25px;
+  background-color: rgba(226, 21, 14, 0.815);
 }
 
 .btnDltExpense:hover {
-    background-color: rgba(184, 14, 14, 0.849);
-    font-weight: 500;
+  background-color: rgba(184, 14, 14, 0.849);
+  font-weight: 500;
 }
 
 .expenseTable {
-    width: 100%;
-    border: solid 1px gray;
-    border-radius: 4px;
+  width: 100%;
+  border: solid 1px gray;
+  border-radius: 4px;
 }
 
 .expenseTable td {
-    text-align: center;
-  
+  text-align: center;
 }
-
 
 /* FORM - Clase general para el contenedor del input y el span */
 .float-label-container {
-    width: 100%;
-    position: relative;
-    margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 /* Estilo del input */
 .float-label-container .input {
-    width: 100%;
-    padding: 20px 5px 5px 10px;
-    outline: none;
-    background: transparent;
-    border: 1px solid rgba(187, 187, 187, 0.397);
-    border-radius: 10px;
-    color: #313131;
-    font-size: medium;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 20px 5px 5px 10px;
+  outline: none;
+  background: transparent;
+  border: 1px solid rgba(187, 187, 187, 0.397);
+  border-radius: 10px;
+  color: #313131;
+  font-size: medium;
+  box-sizing: border-box;
 }
 
 /* Efecto hover en el input */
 .float-label-container .input:hover {
-    border-color: rgba(107, 106, 106, 0.397);
+  border-color: rgba(107, 106, 106, 0.397);
 }
 
 /* Efecto focus en el input */
 .float-label-container .input:focus {
-    border-color: rgba(19, 78, 112, 0.61);
+  border-color: rgba(19, 78, 112, 0.61);
 }
 
 /* Estilo del span para que funciones debe estar INPUT - REQUIRED*/
-.float-label-container .input+span {
-    position: absolute;
-    left: 10px;
-    top: 0px;
-    font-size: 0.9em;
-    cursor: text;
-    transition: 0.3s ease;
-    padding: 0 5px;
-    pointer-events: none;
-    /* Evitar que el span interfiera con los clics del usuario */
+.float-label-container .input + span {
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+  padding: 0 5px;
+  pointer-events: none;
+  /* Evitar que el span interfiera con los clics del usuario */
 }
 
 /* Estilo del span cuando el input está vacío y no tiene focus */
-.float-label-container .input:placeholder-shown+span {
-    top: 12.5px;
-    font-size: 0.9em;
+.float-label-container .input:placeholder-shown + span {
+  top: 12.5px;
+  font-size: 0.9em;
 }
 
 /* Estilo del span cuando el input tiene focus o es válido */
-.float-label-container .input:focus+span,
-.float-label-container .input:valid+span {
-    top: -7px;
-    font-size: 0.8em;
-    font-weight: 600;
+.float-label-container .input:focus + span,
+.float-label-container .input:valid + span {
+  top: -7px;
+  font-size: 0.8em;
+  font-weight: 600;
 }

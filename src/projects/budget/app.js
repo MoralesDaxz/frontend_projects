@@ -8,8 +8,8 @@ const formExpense = document.getElementById("addExpenseForm");
 const spanTotal = document.getElementById("total");
 const spanRemaining = document.getElementById("remaining");
 const boxListExpense = document.getElementById("boxListExpense");
-const saveBtn = document.getElementById("saveBtn")
-const restartBtn = document.getElementById("restartBtn")
+const saveBtn = document.getElementById("saveBtn");
+const restartBtn = document.getElementById("restartBtn");
 //Clases
 class Budget {
   constructor(budgetProp) {
@@ -23,13 +23,15 @@ class Budget {
       this.expense.reduce((total, curr) => total + curr.qtyExpense, 0)
     );
 
-    this.subAmount = Number(this.amount - expensed);
+    return (this.subAmount = Number(this.amount - expensed));
   }
 
   calculateExpense(propExpense) {
-    if (this.subAmount === 0) {
+    const limitAmount = this.subAmount - propExpense.qtyExpense;
+    if (limitAmount < 0) {
       ui.insertAlert("Fondos insuficientes", "error", "not_credit");
       ui.rmvElement("not_credit");
+      
       return;
     }
     this.expense = [...this.expense, propExpense];
@@ -109,8 +111,8 @@ class UserInterface {
     listExpense.appendChild(table);
   }
   budgetAndRest(amount, subAmount) {
-    spanTotal.innerText = `${amount.toString()} €`;
-    spanRemaining.innerText = `${subAmount.toString()} €`;
+    spanTotal.innerText = `${amount.toLocaleString()} €`;
+    spanRemaining.innerText = `${subAmount.toLocaleString()} €`;
   }
   rmvElement(id) {
     setTimeout(() => {
@@ -128,7 +130,10 @@ budget = new Budget();
 //Funciones
 function addExpense() {
   const nameExpense = document.getElementById("nameExpense").value;
-  const qtyExpense = Number(document.getElementById("quantityExpense").value);
+  const qtyExpense = parseFloat(
+    document.getElementById("quantityExpense").value
+  );
+
   const expense = {
     nameExpense,
     qtyExpense,
@@ -138,15 +143,14 @@ function addExpense() {
   if (nameExpense === "") {
     ui.insertAlert("Indique concepto", "error", "errorConcept");
     ui.rmvElement("errorConcept");
-    return;
-  } else if (!isNaN(qtyExpense) && qtyExpense <= 0) {
+  } else if (isNaN(qtyExpense) || qtyExpense <= 0) {
     ui.insertAlert("Monto invalido", "error", "errorAmount");
     ui.rmvElement("errorAmount");
     return;
   } else {
     budget.calculateExpense(expense);
     boxListExpense.classList.remove("hidden");
-
+    boxListExpense.classList.add("containerTable");
     formExpense.reset();
     return document.getElementById("nameExpense").focus();
   }
@@ -154,20 +158,22 @@ function addExpense() {
 
 //Carga de presupuesto
 const initBudget = () => {
-  /* const infoBudge = { expense: [], amount: 0, subAmount: 0 }; */
   const valor = parseFloat(inputBudget.value);
   if (!isNaN(valor) && valor > 0) {
     budget = new Budget(valor);
     inputBudget.disabled = true;
-    saveBtn.classList.add("hidden")
-    restartBtn.classList.remove("hidden")
+    saveBtn.classList.add("hidden");
+    restartBtn.classList.remove("hidden");
     spanAmount.innerText = `${valor.toLocaleString()} €`;
     ui.budgetAndRest(valor, valor);
     boxFormExpense.classList.remove("hidden");
-    boxFormExpense.classList.add("flex flex-col gap-4");
+    budgetForm.classList.add("hidden")
+   
+    
   } else {
     ui.insertAlert("Ingrese un número válido.", "error", "errorEntry");
     ui.rmvElement("errorEntry");
+    return;
   }
 };
 
