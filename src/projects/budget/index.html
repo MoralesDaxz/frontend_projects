@@ -5,20 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link rel="icon" type="image/x-icon" href="./styles/img/favicon.ico">
+    <meta property="og:description" content="Utilizacion de clases, usando html, css, js y tailwind.">
     <link rel="stylesheet" href="./styles/style.css">
     <title>Presupuesto</title>
 </head>
 
-<body class="flex flex-col items-center gap-2 p-2 w-full max-w-[850px]">
+<body class="flex flex-col items-center gap-2 p-2 w-[90%] sm:w-[60%]">
     <div class="flex flex-col items-center sm:flex-row gap-2">
 
         <h1 class="text-center font-normal text-xl sm:my-4">Rendimiento de gastos</h1> <span id="amount"></span>
     </div>
-    <section class="w-full flex flex-col items-center sm:flex sm:flex-row sm:items-start sm:justify-center sm:max-w-[300px] gap-2 p-2 rounded-sm">
+    <section
+        class="flex flex-col items-center sm:flex sm:flex-row sm:items-start sm:justify-center gap-2 p-2 rounded-sm">
 
-        <form id="budgetForm"
-            class="  flex flex-col items-center justify-between bg-[#acacacc5] p-2 rounded-sm">
+        <form id="budgetForm" class="  flex flex-col items-center justify-between bg-[#acacacc5] p-2 rounded-sm">
 
             <label class="float-label-container">
                 <input class="input" type="number" id="budgetInput" placeholder="" required />
@@ -34,12 +35,12 @@
 
 
         </form>
-        <article class="hidden relative" id="boxAddExpense">
-                    <button id="restartBtn" class="btn-secundary absolute top-2 right-2 hidden" onclick="resetPage()">
-                        <p>Reiniciar</p>
-                        <img src="https://i.ibb.co/hJ2L4Wt7/reset.png" alt="reset" width="20px" height="20px">
-                    </button>
-            <div class="bg-[#e5e7ebb7] text-black p-2 rounded-sm w-full sm:max-w-[300px]">
+        <article class="hidden relative w-full" id="boxAddExpense">
+            <button id="restartBtn" class="btn-secundary absolute top-2 right-2 hidden" onclick="resetPage()">
+                <p>Reiniciar</p>
+                <img src="https://i.ibb.co/hJ2L4Wt7/reset.png" alt="reset" width="20px" height="20px">
+            </button>
+            <div class="bg-[#e5e7ebb7] text-black p-2 rounded-sm w-full">
                 <h2 class="text-[#041c31e7] text-center font-bold mt-8 mb-2">Añadir gasto</h2>
                 <form class="w-full flex flex-col items-center justify-between" id="addExpenseForm" action="#">
                     <label class="float-label-container">
@@ -54,6 +55,7 @@
                         <span class="select-none bg-[#123a5ce7] text-white rounded-3xl">
                             Monto
                         </span>
+                        <p class="absolute pl-2 bottom-[-15px] text-[.7rem] text-[#000000c0]">*Ejemplo: 15 o 15.50</p>
                     </label>
                     <button class="btn-primary" type="submit">
                         <p>
